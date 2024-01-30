@@ -1,0 +1,26 @@
+from collections import Counter
+import re
+
+# Provided text
+text = """
+[... The entire provided text ...]
+"""
+
+# Preprocessing
+text = text.lower()
+text = re.sub(r'[^\w\s]', '', text)
+words = text.split()
+
+# Counting
+word_counts = Counter(words)
+
+# Filtering common words (add more if needed)
+stop_words = set(['the', 'and', 'is', 'in', 'to', 'i', 'a', 'it', 'that', 'of'])
+filtered_counts = {word: count for word, count in word_counts.items() if word not in stop_words}
+
+# Top 10 words
+top_10 = filtered_counts.most_common(10)
+
+# Print the top 10 words
+for word, count in top_10:
+    print(f"{word}: {count}")
